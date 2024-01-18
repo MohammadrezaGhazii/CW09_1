@@ -1,6 +1,7 @@
 package service;
 
 import repository.AdminRepository;
+import utilities.Validation;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -16,9 +17,23 @@ public class AdminService {
         System.out.println("***register admin***");
         System.out.println("enter admin name: ");
         String name = scanner.nextLine();
-        getUniqueUsername();
+        String username=getUniqueUsername();
+        String password=getStrongPassword();
 
 
+    }
+
+    private String getStrongPassword() {
+        String password="";
+        while (true){
+            System.out.println("enter admin password");
+            password=scanner.nextLine();
+            if (Validation.isPasswordValid(password))
+                break;
+            else
+                System.out.println("invalid Password");
+        }
+        return password;
     }
 
     private String getUniqueUsername() throws SQLException {
