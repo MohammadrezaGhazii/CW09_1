@@ -36,4 +36,68 @@ public class Prescription {
         this.price = price;
         this.adminConfirm = adminConfirm;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(String medicine) {
+        this.medicine = medicine;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isDoesExist() {
+        return doesExist;
+    }
+
+    public void setDoesExist(boolean doesExist) {
+        this.doesExist = doesExist;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public boolean isAdminConfirm() {
+        return adminConfirm;
+    }
+
+    public void setAdminConfirm(boolean adminConfirm) {
+        this.adminConfirm = adminConfirm;
+    }
 }
