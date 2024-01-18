@@ -51,6 +51,18 @@ public class PatientService {
         else
             System.out.println("Error");
     }
+    public void deletePatient (int patientId) throws SQLException {
+        Patient patient = patientRepository.load(patientId);
+        if (patient == null) {
+            System.out.println("patient is not exist");
+            return;
+        }
+        int result = patientRepository.delete(patientId);
+        if (result != 0)
+            System.out.println("Successful");
+        else
+            System.out.println("Error");
+    }
 
     private String getValidPassword() {
         String password = "" ;
