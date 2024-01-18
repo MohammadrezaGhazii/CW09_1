@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Arrays;
+
 public class Patient {
     private int patientID ;
     private String patientName ;
@@ -73,5 +75,17 @@ public class Patient {
 
     public void setPrescription(Prescription[] prescription) {
         this.prescription = prescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "patientID=" + patientID +
+                ", patientName='" + patientName + '\'' +
+                ", nationalId='" + nationalId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", prescription=" + Arrays.toString(prescription) +
+                '}';
     }
 }
