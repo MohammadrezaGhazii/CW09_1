@@ -4,6 +4,7 @@ import entities.Patient;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PatientRepository {
@@ -23,5 +24,13 @@ public class PatientRepository {
         ps.setString(4,patient.getPassword());
 
         return ps.executeUpdate();
+    }
+    public boolean isUsernameExist (String username) throws SQLException {
+        String exist = "SELECT * FROM patient WHERE username = ? ;" ;
+        PreparedStatement ps = connection.prepareStatement(exist);
+        ps.setString(1,username);
+
+        ResultSet resultSet = ps.executeQuery();
+        return resultSet.next();
     }
 }
