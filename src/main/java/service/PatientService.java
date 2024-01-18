@@ -20,16 +20,27 @@ public class PatientService {
         System.out.println("Enter name : ");
         String name = scanner.nextLine();
         String nationalId = getValidNationalId();
-        System.out.println("Enter username : ");
-        String username = scanner.nextLine();
+        String username = getUniqueUsername();
         System.out.println("Enter password : ");
         String password = scanner.nextLine();
-
         int result = patientRepository.save(new Patient(name, nationalId, username, password));
         if (result!=0)
             System.out.println("successfull-Patient is added");
         else
             System.out.println("Error-Patient is not added");
+    }
+
+    private String getUniqueUsername() throws SQLException {
+        String username = "" ;
+        while (true){
+            System.out.println("Enter username : ");
+            username = scanner.nextLine();
+            if (!patientRepository.isUsernameExist(username))
+                break;
+            else
+                System.out.println("Username is no available");
+        }
+        return username;
     }
 
     private String getValidNationalId() {
