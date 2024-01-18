@@ -100,4 +100,18 @@ public class Prescription {
     public void setAdminConfirm(boolean adminConfirm) {
         this.adminConfirm = adminConfirm;
     }
+
+    @Override
+    public String toString() {
+        return "Prescription{" +
+                "id=" + id +
+                ", patientId=" + patientId +
+                ", medicine='" + medicine + '\'' +
+                ", number=" + number +
+                ", description='" + description + '\'' +
+                ", doesExist=" + doesExist +
+                ", price=" + price +
+                ", adminConfirm=" + adminConfirm +
+                '}';
+    }
 }
