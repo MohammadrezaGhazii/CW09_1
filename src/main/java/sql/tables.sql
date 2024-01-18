@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS prescription
     patient_id int references patient(patient_id),
     medicine VARCHAR(50),
     number int ,
+    description VARCHAR(255),
     does_exist boolean ,
-    price BIGINT
+    price BIGINT ,
+    admin_confirm boolean
 );
