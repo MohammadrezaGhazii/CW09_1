@@ -57,6 +57,13 @@ public class PatientRepository {
 
         return ps.executeUpdate();
     }
+    public int delete (int patientId) throws SQLException {
+        String deleteQuery = "DELETE FROM patient WHERE patient_id = ? ;" ;
+        PreparedStatement ps = connection.prepareStatement(deleteQuery);
+        ps.setInt(1, patientId);
+
+        return ps.executeUpdate();
+    }
     public boolean isUsernameExist (String username) throws SQLException {
         String exist = "SELECT * FROM patient WHERE username = ? ;" ;
         PreparedStatement ps = connection.prepareStatement(exist);
