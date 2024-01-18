@@ -114,4 +114,17 @@ public class Prescription {
                 ", adminConfirm=" + adminConfirm +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prescription that = (Prescription) o;
+        return id == that.id && patientId == that.patientId && number == that.number && doesExist == that.doesExist && adminConfirm == that.adminConfirm && Objects.equals(medicine, that.medicine) && Objects.equals(description, that.description) && Objects.equals(price, that.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, patientId, medicine, number, description, doesExist, price, adminConfirm);
+    }
 }
