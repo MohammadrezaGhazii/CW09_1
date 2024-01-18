@@ -21,13 +21,25 @@ public class PatientService {
         String name = scanner.nextLine();
         String nationalId = getValidNationalId();
         String username = getUniqueUsername();
-        System.out.println("Enter password : ");
-        String password = scanner.nextLine();
+        String password = getValidPassword();
         int result = patientRepository.save(new Patient(name, nationalId, username, password));
         if (result!=0)
             System.out.println("successfull-Patient is added");
         else
             System.out.println("Error-Patient is not added");
+    }
+
+    private String getValidPassword() {
+        String password = "" ;
+        while (true){
+            System.out.println("Enter password : ");
+            password = scanner.nextLine();
+            if (Validation.isPasswordValid(password))
+                break;
+            else
+                System.out.println("invalid password");
+        }
+        return password;
     }
 
     private String getUniqueUsername() throws SQLException {
