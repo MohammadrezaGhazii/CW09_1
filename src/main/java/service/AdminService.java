@@ -1,5 +1,6 @@
 package service;
 
+import entities.Admin;
 import repository.AdminRepository;
 import utilities.Validation;
 
@@ -19,6 +20,13 @@ public class AdminService {
         String name = scanner.nextLine();
         String username=getUniqueUsername();
         String password=getStrongPassword();
+        int result = adminRepository.save(new Admin(name, username, password));
+        if (result!=0){
+            System.out.println("successful");
+        }
+        else
+            System.out.println("error");
+
 
 
     }
