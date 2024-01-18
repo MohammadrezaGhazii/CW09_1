@@ -1,9 +1,19 @@
 package utilities;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Validation {
-
+    private static final Pattern PASSWORD_PATTERN ;
+    static {
+        PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])" +
+                "(?=.*[0-9])(?=.*[@#!%&*])[A-Za-z0-9@#!%&*]{8,10}$") ;
+    }
+    public static boolean isPasswordValid(String password){
+        Matcher matcher = PASSWORD_PATTERN.matcher(password);
+        return matcher.matches();
+    }
     public static boolean validateMelliCode(String melliCode) {
 
         String[] identicalDigits = {"0000000000", "1111111111", "2222222222", "3333333333", "4444444444", "5555555555", "6666666666", "7777777777", "8888888888", "9999999999"};
