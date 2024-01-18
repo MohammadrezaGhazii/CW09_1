@@ -6,3 +6,10 @@ CREATE TABLE IF NOT EXISTS patient
     username VARCHAR(50) UNIQUE ,
     password VARCHAR(50)
 );
+CREATE TABLE IF NOT EXISTS admin
+(
+    admin_id SERIAL PRIMARY KEY ,
+    name VARCHAR (50),
+    username VARCHAR (50) UNIQUE ,
+    password VARCHAR (50)
+);
