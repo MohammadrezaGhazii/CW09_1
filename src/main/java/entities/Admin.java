@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Objects;
+
 public class Admin {
     private int adminId ;
     private String name ;
@@ -62,5 +64,18 @@ public class Admin {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Admin admin = (Admin) o;
+        return adminId == admin.adminId && Objects.equals(name, admin.name) && Objects.equals(username, admin.username) && Objects.equals(password, admin.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(adminId, name, username, password);
     }
 }
