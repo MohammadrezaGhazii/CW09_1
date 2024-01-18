@@ -25,6 +25,18 @@ public class PatientRepository {
 
         return ps.executeUpdate();
     }
+    public int edit (Patient patient) throws SQLException {
+        String editQuery = "UPDATE patient SET name = ?, national_id = ?," +
+                " username = ?, password = ? WHERE patient_id = ? ;" ;
+        PreparedStatement ps = connection.prepareStatement(editQuery);
+        ps.setString(1, patient.getPatientName());
+        ps.setString(2,patient.getNationalId());
+        ps.setString(3,patient.getUsername());
+        ps.setString(4,patient.getPassword());
+        ps.setInt(5,patient.getPatientID());
+
+        return ps.executeUpdate();
+    }
     public boolean isUsernameExist (String username) throws SQLException {
         String exist = "SELECT * FROM patient WHERE username = ? ;" ;
         PreparedStatement ps = connection.prepareStatement(exist);
