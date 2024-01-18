@@ -16,4 +16,24 @@ public class Prescription {
     public Prescription() {
     }
 
+    public Prescription(int id, int patientId, String medicine, int number, String description, boolean doesExist, BigDecimal price, boolean adminConfirm) {
+        this.id = id;
+        this.patientId = patientId;
+        this.medicine = medicine;
+        this.number = number;
+        this.description = description;
+        this.doesExist = doesExist;
+        this.price = price;
+        this.adminConfirm = adminConfirm;
+    }
+
+    public Prescription(int patientId, String medicine, int number, String description, boolean doesExist, BigDecimal price, boolean adminConfirm) {
+        this.patientId = patientId;
+        this.medicine = medicine;
+        this.number = number;
+        this.description = description;
+        this.doesExist = doesExist;
+        this.price = price;
+        this.adminConfirm = adminConfirm;
+    }
 }
