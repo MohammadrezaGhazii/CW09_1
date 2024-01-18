@@ -4,6 +4,7 @@ import entities.Admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminRepository {
@@ -21,5 +22,16 @@ public class AdminRepository {
         ps.setString(3,admin.getPassword());
 
         return ps.executeUpdate();
+    }
+    public boolean isUsernameExists(String username) throws SQLException {
+        String exists="SELECT * FROM admin WHERE username=?;";
+        PreparedStatement ps=connection.prepareStatement(exists);
+        ps.setString(1,username);
+
+        ResultSet resultSet = ps.executeQuery();
+
+       return resultSet.next();
+
+
     }
 }
