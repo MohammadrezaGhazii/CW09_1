@@ -25,6 +25,26 @@ public class PatientRepository {
 
         return ps.executeUpdate();
     }
+    public Patient load (int patientId) throws SQLException {
+        String loadQuary = "SELECT * FROM patient WHERE patient_id = ?;";
+        PreparedStatement ps = connection.prepareStatement(loadQuary);
+        ps.setInt(1,patientId);
+
+        ResultSet resultSet = ps.executeQuery();
+        if (resultSet.next()){
+            int patient_id = resultSet.getInt(1);
+            String name = resultSet.getString(2);
+            String national_id = resultSet.getString(3);
+            String user_name = resultSet.getString(4);
+            String password = resultSet.getString(5);
+
+            return new Patient(patient_id , name , national_id , user_name , password );
+        }
+        else {
+            System.out.println("patient with id \' " + patientId + "\' is not exist");
+            return null ;
+        }
+    }
     public int edit (Patient patient) throws SQLException {
         String editQuery = "UPDATE patient SET name = ?, national_id = ?," +
                 " username = ?, password = ? WHERE patient_id = ? ;" ;
