@@ -13,3 +13,12 @@ CREATE TABLE IF NOT EXISTS admin
     username VARCHAR (50) UNIQUE ,
     password VARCHAR (50)
 );
+CREATE TABLE IF NOT EXISTS prescription
+(
+    prescription_id SERIAL PRIMARY KEY ,
+    patient_id int references patient(patient_id),
+    medicine VARCHAR(50),
+    number int ,
+    does_exist boolean ,
+    price BIGINT
+);
