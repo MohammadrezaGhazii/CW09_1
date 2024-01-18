@@ -20,13 +20,36 @@ public class PatientService {
         System.out.println("Enter name : ");
         String name = scanner.nextLine();
         String nationalId = getValidNationalId();
-        String username = getUniqueUsername();
+        String username = getUniqueUsername("");
         String password = getValidPassword();
+
         int result = patientRepository.save(new Patient(name, nationalId, username, password));
         if (result!=0)
             System.out.println("successfull-Patient is added");
         else
             System.out.println("Error-Patient is not added");
+    }
+    public void editPatient (int patientId) throws SQLException {
+        Patient patient = patientRepository.load(patientId);
+        if (patient == null){
+            System.out.println("nothing exist");
+            return;
+        }
+        System.out.println("You are going to edit this patient : ");
+        System.out.println(patient);
+        System.out.println("**** edit patient ****");
+        System.out.println("Enter new name :");
+        String newName = scanner.nextLine();
+        String newNationalId = getValidNationalId();
+        String newUsername = getUniqueUsername(patient.getUsername());
+        String newPassword = getValidPassword();
+
+        int result = patientRepository.edit(new Patient(patientId , newName , newNationalId ,
+                newUsername , newPassword));
+        if (result != 0)
+            System.out.println("Successful");
+        else
+            System.out.println("Error");
     }
 
     private String getValidPassword() {
@@ -42,11 +65,13 @@ public class PatientService {
         return password;
     }
 
-    private String getUniqueUsername() throws SQLException {
+    private String getUniqueUsername(String oldUsername) throws SQLException {
         String username = "" ;
         while (true){
             System.out.println("Enter username : ");
             username = scanner.nextLine();
+            if (!oldUsername.equals("") && oldUsername.equals(username))
+                return username;
             if (!patientRepository.isUsernameExist(username))
                 break;
             else
