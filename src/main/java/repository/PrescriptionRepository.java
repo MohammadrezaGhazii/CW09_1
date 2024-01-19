@@ -65,7 +65,6 @@ public class PrescriptionRepository {
         PreparedStatement ps = connection.prepareStatement(load,
                 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ps.setInt(1, patientId);
-
         ResultSet resultSet = ps.executeQuery();
 
         int counter = 0;
@@ -73,10 +72,11 @@ public class PrescriptionRepository {
         Prescription[] prescriptions = new Prescription[counter];
 
         resultSet.beforeFirst();
+        int k = 0;
         while (resultSet.next()) {
-            prescriptions[k++] = getPrescription()
+            prescriptions[k++] = getPrescription(resultSet);
         }
-
+        return prescriptions;
     }
 
     private static Prescription getPrescription(ResultSet resultSet) throws SQLException {
