@@ -3,6 +3,7 @@ package repository;
 import entities.Prescription;
 
 import java.math.BigDecimal;
+import java.security.Permission;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -93,5 +94,22 @@ public class PrescriptionRepository {
         prescription = new Prescription(prescription_id, patient_id, medicine, number
                 , description, doesExist, price, adminConfirm);
         return prescription;
+    }
+    public Prescription[] seePrescription (int patient_id) throws SQLException {
+        String see="select * from prescription  where admin_confirm=true;";
+        PreparedStatement ps = connection.prepareStatement(see,
+                ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+        ResultSet resultSet = ps.executeQuery();
+        int counter=0;
+        while (resultSet.next()){
+            counter++;
+        }
+        Prescription[] prescriptions=new Prescription[counter];
+        resultSet.beforeFirst();
+        int k=0;
+        while (resultSet.next()){
+             prescriptions[k++]=getPrescription(resultSet);
+        }
+        return prescriptions;
     }
 }
