@@ -22,6 +22,7 @@ public class PrescriptionService {
         String medicine = scanner.nextLine();
         System.out.println("enter number ");
         int number = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("enter description ");
         String description = scanner.nextLine();
 
