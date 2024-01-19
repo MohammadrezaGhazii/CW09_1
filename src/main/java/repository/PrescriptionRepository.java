@@ -52,6 +52,11 @@ public class PrescriptionRepository {
         PreparedStatement ps = connection.prepareStatement(load);
         ps.setInt(1, prescriptionId);
         ResultSet resultSet = ps.executeQuery();
+        return getPrescription(resultSet);
+
+    }
+
+    private static Prescription getPrescription(ResultSet resultSet) throws SQLException {
         Prescription prescription = null;
         while (resultSet.next()) {
             int prescription_id = resultSet.getInt(1);
@@ -67,6 +72,5 @@ public class PrescriptionRepository {
                     , description, doesExist, price, adminConfirm);
         }
         return prescription;
-
     }
 }
