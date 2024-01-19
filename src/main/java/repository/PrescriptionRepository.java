@@ -52,25 +52,46 @@ public class PrescriptionRepository {
         PreparedStatement ps = connection.prepareStatement(load);
         ps.setInt(1, prescriptionId);
         ResultSet resultSet = ps.executeQuery();
-        return getPrescription(resultSet);
+        if (resultSet.next())
+            return getPrescription(resultSet);
+        else {
+            System.out.println("prescription with id \'" + prescriptionId + "\' does not exist.");
+            return null;
+        }
+    }
+
+    public Prescription[] loadByPatientId(int patientId) throws SQLException {
+        String load = "select * from prescription  where patient_id=?;";
+        PreparedStatement ps = connection.prepareStatement(load,
+                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ps.setInt(1, patientId);
+
+        ResultSet resultSet = ps.executeQuery();
+
+        int counter = 0;
+        while (resultSet.next()) counter++;
+        Prescription[] prescriptions = new Prescription[counter];
+
+        resultSet.beforeFirst();
+        while (resultSet.next()) {
+            prescriptions[k++] = getPrescription()
+        }
 
     }
 
     private static Prescription getPrescription(ResultSet resultSet) throws SQLException {
         Prescription prescription = null;
-        while (resultSet.next()) {
-            int prescription_id = resultSet.getInt(1);
-            int patient_id = resultSet.getInt(2);
-            String medicine = resultSet.getString(3);
-            int number = resultSet.getInt(4);
-            String description = resultSet.getString(5);
-            boolean doesExist = resultSet.getBoolean(6);
-            BigDecimal price = resultSet.getBigDecimal(7);
-            boolean adminConfirm = resultSet.getBoolean(8);
+        int prescription_id = resultSet.getInt(1);
+        int patient_id = resultSet.getInt(2);
+        String medicine = resultSet.getString(3);
+        int number = resultSet.getInt(4);
+        String description = resultSet.getString(5);
+        boolean doesExist = resultSet.getBoolean(6);
+        BigDecimal price = resultSet.getBigDecimal(7);
+        boolean adminConfirm = resultSet.getBoolean(8);
 
-            prescription = new Prescription(prescription_id, patient_id, medicine, number
-                    , description, doesExist, price, adminConfirm);
-        }
+        prescription = new Prescription(prescription_id, patient_id, medicine, number
+                , description, doesExist, price, adminConfirm);
         return prescription;
     }
 }
