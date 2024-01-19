@@ -115,6 +115,7 @@ public class PrescriptionRepository {
     public BigDecimal CalculatePrice(int patient_id) throws SQLException {
     String price ="select sum(price*number) from prescription where patient_id=? group by patient_id;";
         PreparedStatement ps = connection.prepareStatement(price);
+        ps.setInt(1,patient_id);
         ResultSet resultSet = ps.executeQuery();
         BigDecimal sumPrice = resultSet.getBigDecimal(1);
         return sumPrice;
