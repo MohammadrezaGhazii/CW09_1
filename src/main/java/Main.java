@@ -1,4 +1,5 @@
 import service.AdminService;
+import service.Menu;
 import service.PatientService;
 import service.PrescriptionService;
 import utilities.ApplicationContext;
@@ -9,6 +10,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
+
+        Menu menu = new Menu();
+        menu.menu();
+
+
+
+
 //        Scanner scanner = new Scanner(System.in);
        // PatientService patientService = ApplicationContext.getPatientService();
 //        System.out.println("Enter id : ");
@@ -21,10 +29,10 @@ public class Main {
 
 //        PatientService patientService=ApplicationContext.getPatientService();
 //        patientService.addPatient();
-     PrescriptionService prescriptionService=ApplicationContext.getPrescriptionService();
+//     PrescriptionService prescriptionService=ApplicationContext.getPrescriptionService();
     // prescriptionService.confirmByAdmin(1);
       //prescriptionService.adminConfirmByPatientId(1);
        // patientService.addPatient();
-        prescriptionService.showPrescription(1);
+//        prescriptionService.showPrescription(1);
     }
 }
