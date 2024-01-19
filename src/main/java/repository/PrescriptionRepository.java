@@ -117,7 +117,11 @@ public class PrescriptionRepository {
         PreparedStatement ps = connection.prepareStatement(price);
         ps.setInt(1,patient_id);
         ResultSet resultSet = ps.executeQuery();
-        BigDecimal sumPrice = resultSet.getBigDecimal(1);
+        BigDecimal sumPrice=new BigDecimal("0");
+        if(resultSet.next()){
+             sumPrice = resultSet.getBigDecimal(1);
+        }
+
         return sumPrice;
     }
 }
