@@ -41,6 +41,16 @@ public class PrescriptionService {
 
     public void confirmByAdmin(int prescriptionId) throws SQLException {
         Prescription prescription = prescriptionRepository.load(prescriptionId);
+        adminConfirmOneByOne(prescription);
+    }
+    public void adminConfirmByPatientId(int patientId) throws SQLException {
+        Prescription[] prescriptions = prescriptionRepository.loadByPatientId(patientId);
+        for (Prescription prescription : prescriptions) {
+            adminConfirmOneByOne(prescription);
+        }
+    }
+
+    private void adminConfirmOneByOne(Prescription prescription) throws SQLException {
         System.out.println(" you are goting to confirm prescription");
         System.out.println(prescription);
         System.out.println("do you confirm this prescription ? [y/n]");
@@ -72,4 +82,5 @@ public class PrescriptionService {
         }else
             System.out.println("error");
     }
+
 }
