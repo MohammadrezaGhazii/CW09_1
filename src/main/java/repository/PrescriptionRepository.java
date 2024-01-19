@@ -47,20 +47,12 @@ public class PrescriptionRepository {
         return ps.executeUpdate();
     }
 
-    public Prescription[] load(int prescriptionId) throws SQLException {
+    public Prescription load(int prescriptionId) throws SQLException {
         String load = "select * from prescription  where prescription_id=?;";
-        PreparedStatement ps = connection.prepareStatement(load,
-                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement ps = connection.prepareStatement(load);
         ps.setInt(1, prescriptionId);
         ResultSet resultSet = ps.executeQuery();
-
-        int counter = 0;
-        while (resultSet.next()) {
-            counter++;
-        }
-        Prescription[] prescriptions = new Prescription[counter];
-        resultSet.beforeFirst();
-        int k = 0;
+        Prescription prescription = null;
         while (resultSet.next()) {
             int prescription_id = resultSet.getInt(1);
             int patient_id = resultSet.getInt(2);
@@ -71,12 +63,10 @@ public class PrescriptionRepository {
             BigDecimal price = resultSet.getBigDecimal(7);
             boolean adminConfirm = resultSet.getBoolean(8);
 
-
-            prescriptions[k++] = new Prescription(prescription_id, patient_id, medicine, number
+            prescription = new Prescription(prescription_id, patient_id, medicine, number
                     , description, doesExist, price, adminConfirm);
-
         }
-        return prescriptions;
+        return prescription;
 
     }
 }
