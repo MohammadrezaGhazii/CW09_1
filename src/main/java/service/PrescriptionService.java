@@ -84,5 +84,12 @@ public class PrescriptionService {
         }else
             System.out.println("error");
     }
-
+public void showPrescription(int patient_id) throws SQLException {
+    Prescription[] prescriptions = prescriptionRepository.seePrescription(patient_id);
+    for (Prescription prescription : prescriptions) {
+        System.out.println(prescription);
+    }
+    BigDecimal prices = prescriptionRepository.CalculatePrice(patient_id);
+    System.out.println("total price of prescription: "+prices);
+}
 }
