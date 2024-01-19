@@ -14,16 +14,49 @@ public class Menu {
 
             System.out.println("Choose a number : ");
             choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice){
-                case 1 -> System.out.println("admin");
-                case 2 -> System.out.println("Patient");
+                case 1 -> signMenu("Admin");
+                case 2 -> signMenu("Patient");
                 case 0 -> {
                     System.out.println("Bye Bye");
                     break;
                 }
             }
         }
+    }
+    public void signMenu (String user){
+        int choice = -1 ;
 
+        while (choice != 0){
+            System.out.println("*** Sign " + user + " ***");
+            System.out.println("1-Sign up");
+            System.out.println("2-Sign in");
+            System.out.println("0-Exit");
+
+            System.out.println("Choose a number : ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice){
+                case 1 -> {
+                    switch (user){
+                        case "Admin" -> System.out.println("admin sign up");
+                        case "Patient" -> System.out.println("Patient sign up");
+                    }
+                }
+                case 2 -> {
+                    switch (user) {
+                        case "Admin" -> System.out.println("admin sign in");
+                        case "Patient" -> System.out.println("Patient sign in");
+                    }
+                }
+                case 0 -> {
+                    System.out.println("Bye Bye");
+                    break;
+                }
+            }
+        }
     }
 }
