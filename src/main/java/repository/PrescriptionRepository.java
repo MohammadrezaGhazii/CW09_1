@@ -28,4 +28,20 @@ public class PrescriptionRepository {
         return ps.executeUpdate();
 
     }
+
+    public int edit(Prescription prescription) throws SQLException {
+        String edit = "UPDATE prescription set medicine=?,number=?,description=?,does_exist=?,price=?,admin_confirm=? " +
+                "                    where patient_id=? and prescription_id=?;";
+        PreparedStatement ps = connection.prepareStatement(edit);
+        ps.setString(1, prescription.getMedicine());
+        ps.setInt(2, prescription.getNumber());
+        ps.setString(3, prescription.getDescription());
+        ps.setBoolean(4, prescription.isDoesExist());
+        ps.setBigDecimal(5, prescription.getPrice());
+        ps.setBoolean(6, prescription.isAdminConfirm());
+        ps.setInt(7, prescription.getPatientId());
+        ps.setInt(8, prescription.getId());
+
+        return ps.executeUpdate();
+    }
 }
