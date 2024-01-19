@@ -25,17 +25,50 @@ public class PrescriptionService {
         System.out.println("enter description ");
         String description = scanner.nextLine();
 
-       int resualt= prescriptionRepository.save(new Prescription(patientId,
+        int resualt = prescriptionRepository.save(new Prescription(patientId,
                 medicine,
                 number,
                 description,
                 false,
                 new BigDecimal("0"),
                 false));
-    if (resualt !=0)
-    {
-        System.out.println("succesfull");
-    }else
-        System.out.println("error");
+        if (resualt != 0) {
+            System.out.println("succesfull");
+        } else
+            System.out.println("error");
+    }
+
+    public void confirmByAdmin(int prescriptionId) throws SQLException {
+        Prescription prescription = prescriptionRepository.load(prescriptionId);
+        System.out.println(" you are goting to confirm prescription");
+        System.out.println(prescription);
+        System.out.println("do you confirm this prescription ? [y/n]");
+        String yn = scanner.nextLine();
+        boolean adminConfirm = false;
+        if (yn.equals("y")) {
+            adminConfirm = true;
+        } else return;
+        boolean doesExist = false;
+        if (adminConfirm) {
+            System.out.println("this item does exist ? [y/n]");
+            yn = scanner.nextLine();
+            if (yn.equals("y")) {
+                doesExist = true;
+            }
+        }
+        BigDecimal price = new BigDecimal("0");
+        if (doesExist) {
+            System.out.println("please enter  price ");
+            price = scanner.nextBigDecimal();
+        }
+        int result = prescriptionRepository.edit(new Prescription(prescription.getId(),
+                prescription.getPatientId(),
+                prescription.getMedicine(),
+                prescription.getNumber(),
+                prescription.getDescription(), doesExist, price, adminConfirm));
+        if (result != 0){
+            System.out.println("succesfull");
+        }else
+            System.out.println("error");
     }
 }
