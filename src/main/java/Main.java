@@ -22,6 +22,7 @@ public class Main {
 //        PatientService patientService=ApplicationContext.getPatientService();
 //        patientService.addPatient();
         PrescriptionService prescriptionService=ApplicationContext.getPrescriptionService();
-        prescriptionService.confirmByAdmin(1);
+//        prescriptionService.confirmByAdmin(1);
+        prescriptionService.adminConfirmByPatientId(1);
     }
 }
